@@ -22,13 +22,14 @@ namespace AE_Code_Test_API.Controllers
         [HttpPost(Name = "ShipToClosestPort")]
         public ShipPortOutputModel ShipToClosestPort([FromBody] int ShipId)
         {
+            _logger.LogInformation(System.Reflection.MethodBase.GetCurrentMethod().Name + " called", ShipId);
             try
             {
                 return _shipService.GetClosestPortOfShip(ShipId);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex.Message, ex.Message);
+                _logger.LogError(ex.Message, ex);
                 throw;
             }
         }

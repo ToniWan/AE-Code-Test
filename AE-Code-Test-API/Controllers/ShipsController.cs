@@ -31,7 +31,7 @@ namespace AE_Code_Test_API.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex.Message, ex.Message);
+                _logger.LogError(ex.Message, ex);
                 throw;
             }
         }
@@ -47,7 +47,7 @@ namespace AE_Code_Test_API.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex.Message, ex.Message);
+                _logger.LogError(ex.Message, ex);
                 throw;
             }
         }
@@ -64,10 +64,9 @@ namespace AE_Code_Test_API.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex.Message, ex.Message);
+                _logger.LogError(ex.Message, ex);
                 throw;
             }
-
         }
     }
 }

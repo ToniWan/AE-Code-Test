@@ -61,20 +61,19 @@ namespace AE_Code_Test_API.Services
             if (shipUpdateModel.VelocityKmh < 0)
                 throw new ArgumentException($"Velocity must larger than 0");
 
-            var ship = aeContext.Ships.Where(x => x.ShipId == shipUpdateModel.ShipId).FirstOrDefault();
-            if (ship != null)
-            {
-                ship.VelocityKmh = shipUpdateModel.VelocityKmh;
-                aeContext.SaveChanges();
-            }
-            else
-            {
+            if (!isShipIdExists(shipUpdateModel.ShipId))
                 throw new ArgumentException($"ShipId[{shipUpdateModel.ShipId}] not found.");
-            }
+
+            var ship = aeContext.Ships.Where(x => x.ShipId == shipUpdateModel.ShipId).FirstOrDefault();
+            ship.VelocityKmh = shipUpdateModel.VelocityKmh;
+            aeContext.SaveChanges();
             return;
         }
         public ShipPortOutputModel GetClosestPortOfShip(int ShipId)
         {
+            if (!isShipIdExists(ShipId))
+                throw new ArgumentException($"ShipId[{ShipId}] not found.");
+
             ShipPortOutputModel shipPortOutpu = new ShipPortOutputModel();
 
             shipPortOutpu.ShipDetail = aeContext.Ships.Where(x => x.ShipId.Equals(ShipId)).First();
@@ -99,6 +98,10 @@ namespace AE_Code_Test_API.Services
 
 
             return shipPortOutpu;
+        }
+
+        private bool isShipIdExists(int ShipId) {
+            return (aeContext.Ships.Where(x => x.ShipId.Equals(ShipId)).Count() > 0);
         }
     }
 }
