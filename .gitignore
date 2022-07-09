@@ -1,0 +1,9 @@
+/AE-Code-Test-API/bin/
+/AE-Code-Test-API/obj/
+/AE-Code-Test-Testing/bin
+/bin/Debug/AE-Code-Test-API.deps.json
+*.cache
+/.vs
+/bin
+/obj
+/AE-Code-Test-Testing/obj
